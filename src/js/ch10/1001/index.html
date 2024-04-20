@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>1001</title>
+    <body>
+        <div>5秒後に alert を表示する</div>
+        <script>
+            window.setTimeout(function() {
+                alert('setTimeout by onload');
+            }, 5000);
+        </script>
+
+        <div>ボタンを押して5秒後に alert を表示する</div>
+        <button id="btn">ボタン</button>
+        <script>
+            btn.onclick = function() {
+                window.setTimeout(function() {
+                    alert('setTimeout by onclick');
+                }, 5000);
+            }
+        </script>
+    </body>
+</html>
