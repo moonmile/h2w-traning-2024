@@ -1,0 +1,24 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Hunbarger API",
+        "description": "This is a sample server for a pet store.",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/categories": {
+            "get": {
+                "summary": "Display a listing of the resource.",
+                "operationId": "fa66c46057886cc399f0aad3e581c9d3",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of categories."
+                    }
+                }
+            }
+        }
+    }
+}
