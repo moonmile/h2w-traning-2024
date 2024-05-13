@@ -6,28 +6,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-/**
- * @OA\OpenApi(
- *   @OA\Info(
- *     title="Hunbarger API",
- *     version="1.0.0",
- *     description="This is a sample server for a pet store.",
- *     @OA\Contact(
- *       email="support@example.com"
- *     )
- *   )
- * )
- */
-
-
- class ApiCategoryController extends Controller
+class ApiCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @OA\Get(
-     *     path="/categories",
-     *     @OA\Response(response="200", description="Display a listing of categories.")
-     * )
      */
     public function index()
     {
@@ -37,19 +19,28 @@ use Illuminate\Http\Request;
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->slug = $request->input('slug');
+        $category->title = $request->input('title');
+        $category->description = $request->input('description');
+        $category->image = $request->input('image');
+        $category->sortid = $request->input('sortid');
+        $category->display = $request->input('display');
+        $category->created_at = now();
+        $category->updated_at = now();
+        $category->is_delete = false;
+        $category->save();
+
+        return response()->json([
+            'message' => 'Category created successfully',
+            'data' => $category,
+        ], 201);
     }
 
     /**
@@ -70,26 +61,42 @@ use Illuminate\Http\Request;
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        if ($category) {
+            $category->slug = $request->input('slug');
+            $category->title = $request->input('title');
+            $category->description = $request->input('description');
+            $category->image = $request->input('image');
+            $category->sortid = $request->input('sortid');
+            $category->display = $request->input('display');
+            $category->updated_at = now();
+            $category->save();
+            return response()->json([
+                'message' => 'Category updated successfully',
+                'data' => $category,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found',
+            ], 200);
+        }
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return response()->json([
+            'message' => 'Category deleted successfully',
+        ], 200);
     }
 }
