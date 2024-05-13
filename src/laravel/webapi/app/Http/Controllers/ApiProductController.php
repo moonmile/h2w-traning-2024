@@ -36,40 +36,63 @@ class ApiProductController extends Controller
         $product->save();
 
         return response()->json([
+            'message' => 'Category created successfully',
             'data' => $product
         ], 201);
+    }
+
+    public function show(Product $product)
+    {
+        $item = Product::find($product->id);
+        if ($item) {
+            return response()->json([
+                'data' => $item
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found'
+            ], 200);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        $product->name = $request->input('name');
-        $product->price = $request->input('price');
-        $product->slug = $request->input('slug');
-        $product->description = $request->input('description');
-        $product->image = $request->input('image');
-        $product->sortid = $request->input('sortid');
-        $product->display = $request->input('display');
-        $product->updated_at = now();
-        $product->save();
-
-        return response()->json([
-            'data' => $product
-        ], 200);
+        $product = Product::find($id);
+        if ($product) {
+            $product->name = $request->input('name');
+            $product->price = $request->input('price');
+            $product->slug = $request->input('slug');
+            $product->description = $request->input('description');
+            $product->image = $request->input('image');
+            $product->sortid = $request->input('sortid');
+            $product->display = $request->input('display');
+            $product->updated_at = now();
+            $product->save();
+            return response()->json([
+                'message' => 'Product updated successfully',
+                'data' => $product,
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found',
+            ], 200);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::find($id);
         $product->delete();
 
         return response()->json([
-            'data' => $product
-        ], 204);
+            'message' => 'Product deleted successfully',
+        ], 200);
     }
 }
 
