@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Category Item View : {{ id }}</h1>
+        <h1>Product Item View : {{ id }}</h1>
 
         <div class="mb-3">
             <label for="id" class="form-label">ID</label>
@@ -55,7 +55,7 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
-interface Category {
+interface Product {
     id: number;
     slug: string;
     title: string;
@@ -71,7 +71,7 @@ interface Category {
 const router = useRouter();
 const id = ref(router.currentRoute.value.params.id);
 // 初期値をいれておく
-const item = ref<Category>({ 
+const item = ref<Product>({ 
     id: 0, 
     slug: '', 
     title: '', 
@@ -85,13 +85,13 @@ const item = ref<Category>({
 });
 
 /**
- * Loads the category item data from the server.
+ * Loads the product item data from the server.
  * @async
  * @function onload
  */
 async function onload() {
     console.log('onload');
-    var url = 'http://localhost:8000/api/categories/' + id.value;
+    var url = 'http://localhost:8000/api/products/' + id.value;
     const response = await axios.get(url);
     item.value = response.data.data;
     // 日時をフォーマット変換しておく
@@ -103,25 +103,25 @@ async function onload() {
 onMounted(onload);
 
 /**
- * Updates the category item.
+ * Updates the product item.
  * @async
  * @function onupdate
  * @returns {Promise<void>}
  */
 async function onupdate() {
     console.log('onupdate');
-    var url = 'http://localhost:8000/api/categories/' + id.value;
+    var url = 'http://localhost:8000/api/products/' + id.value;
     const response = await axios.put(url, item.value)
-    router.push({ name: 'category' });
+    router.push({ name: 'product' });
 }
 
 /**
  * Handles the cancel action.
- * Navigates back to the 'category' route.
+ * Navigates back to the 'product' route.
  */
 function oncancel() {
     console.log('oncancel');
-    router.push({ name: 'category' });
+    router.push({ name: 'product' });
 }
 
 
