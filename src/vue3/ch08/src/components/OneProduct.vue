@@ -10,6 +10,8 @@ import { defineProps } from 'vue';
 
 // props をバラバラに送る場合
 const props = defineProps(['id', 'name', 'description']);
+// const props = defineProps(['content']);
+
 const id = ref(props.id);
 const name = ref(props.name);
 const description = ref(props.description);
