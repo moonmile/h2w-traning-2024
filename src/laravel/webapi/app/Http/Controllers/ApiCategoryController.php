@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ApiCategoryController extends Controller
 {
@@ -46,15 +47,16 @@ class ApiCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        $item = Category::find($category->id);
+        $item = Category::find($id);
         if ($item) {
             return response()->json([
                 'data' => $item,
             ], 200);
         } else {
             return response()->json([
+                'data' => null,
                 'message' => 'Not found',
             ], 200);
         }

@@ -41,15 +41,16 @@ class ApiProductController extends Controller
         ], 201);
     }
 
-    public function show(Product $product)
+    public function show($id)
     {
-        $item = Product::find($product->id);
+        $item = Product::find($id);
         if ($item) {
             return response()->json([
                 'data' => $item
             ], 200);
         } else {
             return response()->json([
+                'data' => null,
                 'message' => 'Not found'
             ], 200);
         }
