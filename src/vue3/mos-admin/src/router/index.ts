@@ -5,6 +5,12 @@ import CategoriesListView from '@/views/CategoriesListView.vue'
 import CategoriesItemView from '@/views/CategoriesItemView.vue'
 import ProductListView from '@/views/ProductListView.vue'
 import ProductItemview from '@/views/ProductItemview.vue'
+import PicksListView from '@/views/PicksListView.vue'
+import PicksItemView from '@/views/PicksItemView.vue'
+import SetMenuListView from '@/views/SetMenuListView.vue'
+import SetMenuItemView from '@/views/SetMenuItemView.vue'
+import TopLictView from '@/views/TopLictView.vue'
+import TopItemView from '@/views/TopItemView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +50,38 @@ const router = createRouter({
       component: ProductItemview
     },
     
+    {
+      path: '/picks-list',
+      name: 'picks-list',
+      component: PicksListView
+    },
+    {
+      path: '/picks-list/:id',
+      name: 'picks-item',
+      component: PicksItemView
+    },
+
+    {
+      path: '/setmenu-list',
+      name: 'setmenu-list',
+      component: SetMenuListView
+    },
+    {
+      path: '/setmenu-list/:id',
+      name: 'setmenu-item',
+      component: SetMenuItemView
+    },
+
+    {
+      path: '/top-list',
+      name: 'top-list',
+      component: TopLictView
+    },
+    {
+      path: '/top-list/:id',
+      name: 'top-item',
+      component: TopItemView
+    }
   ]
 })
 
