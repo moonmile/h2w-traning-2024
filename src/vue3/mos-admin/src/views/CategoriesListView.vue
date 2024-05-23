@@ -1,21 +1,22 @@
 <template>
     <div>
         <h1>ハンバーガー注文 カテゴリー一覧</h1>
-
+        <!--
         <select name="StoreDesignation">
             <option value="store0">店舗指定</option>
             <option value="store1">○○店</option>
             <option value="store2">△△店</option>
             <option value="store3">◇◇店</option>
-            <!-- 他のオプションも追加 -->
+             他のオプションも追加 
         </select>
-        <button v-on:click="onadd()" type="button" class="btn btn-success">新規作成</button>
+        -->
+        
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>カテゴリ名</th>
+                    <th class="widthId">ID</th>
+                    <th class="widthTitle">カテゴリ名</th>
                     <!--
                     <th>説明</th>
                     <th>写真</th>
@@ -23,7 +24,7 @@
                     <th>表示</th>
                     <th>有効</th>
                     -->
-                    <th>　操作</th>
+                    <th class="widthOperation">　　操作<button v-on:click="onadd()" type="button" class="btn btn-success">新規作成</button></th>
                 </tr>
             </thead>
             <tbody>
@@ -116,18 +117,28 @@ h1 {
 }
 
 table {
+    table-layout: fixed;
     width: 100%;
 }
 th {
     text-align: left;
 }
+.widthId {
+    width: 5%;
+}
+.widthTitle {
+    width: 67%;
+}
+.widthOperation {
+    width: 28%;
+}
 
 .btn {
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 6px;
+    margin-left: 6px;
 }
 .btn-danger {
-    margin-right: 15px;
+    margin-right: 17px;
 }
 
 select {
@@ -142,7 +153,7 @@ select {
 .btn-success {
     margin-right: 10px;
     position: relative;
-    left: 57%;
+    left: 3%;
 }
 
 
