@@ -128,7 +128,7 @@ async function onupdate() {
  */
 function oncancel() {
     console.log('oncancel');
-    router.push({ name: 'caetgories-list' });
+    router.push({ name: 'categories-list' });
 }
 
 

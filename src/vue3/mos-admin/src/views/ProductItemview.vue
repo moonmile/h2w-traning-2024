@@ -11,8 +11,8 @@
             <input type="text" id="slug" v-model="item.slug" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" v-model="item.name" class="form-control">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" v-model="item.title" class="form-control">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -21,10 +21,6 @@
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="text" id="image" v-model="item.image" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="text" id="price" v-model="item.price" class="form-control">
         </div>
         <div class="mb-3">
             <label for="sortid" class="form-label">Sort ID</label>
@@ -62,10 +58,9 @@ import axios from 'axios';
 interface Product {
     id: number;
     slug: string;
-    name: string;
+    title: string;
     description: string;
     image: string;
-    price: string;
     sortid: number;
     display: boolean;
     created_at: string;
@@ -79,10 +74,9 @@ const id = ref(router.currentRoute.value.params.id);
 const item = ref<Product>({ 
     id: 0, 
     slug: '', 
-    name: '', 
+    title: '', 
     description: '', 
     image: '', 
-    price: '',
     sortid: 0, 
     display: false, 
     created_at: '', 
@@ -108,7 +102,7 @@ async function onload() {
 /// ロード時に実行
 onMounted(onload);
 
-/* 更新ボタン
+/**
  * Updates the product item.
  * @async
  * @function onupdate
@@ -118,20 +112,20 @@ async function onupdate() {
     console.log('onupdate');
     var url = 'http://localhost:8000/api/products/' + id.value;
     const response = await axios.put(url, item.value)
-    router.push({ name: 'product-list' });
+    router.push({ name: 'product' });
 }
 
-/* キャンセルボタン
+/**
  * Handles the cancel action.
  * Navigates back to the 'product' route.
  */
 function oncancel() {
     console.log('oncancel');
-    router.push({ name: 'product-list' });
+    router.push({ name: 'product' });
 }
 
 
-/*
+/**
  * Formats a given datetime string into the desired format.
  * @param {string} datetimeStr - The datetime string to be formatted.
  * @returns {string} The formatted datetime string in the format "YYYY-MM-DDTHH:MM".
