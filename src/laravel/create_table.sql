@@ -29,8 +29,8 @@ create table Categories (
 	image varchar(100),	-- カテゴリ画像URL
 	sortid int,			-- ソートID
 	display bool,		-- 表示有無
-	create_at datetime,	-- 作成日時
-	update_at datetime,	-- 更新日時
+	created_at datetime,	-- 作成日時
+	updated_at datetime,	-- 更新日時
 	is_delete bool		-- 削除フラグ
 );
 
