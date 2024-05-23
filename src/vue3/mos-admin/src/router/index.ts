@@ -12,6 +12,9 @@ import SetMenuItemView from '@/views/SetMenuItemView.vue'
 import TopLictView from '@/views/TopLictView.vue'
 import TopItemView from '@/views/TopItemView.vue'
 
+import CategoryListView from '@/views/CategoryListView.vue'
+import CategoryItemView from '@/views/CategoryItemView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -81,6 +84,18 @@ const router = createRouter({
       path: '/top-list/:id',
       name: 'top-item',
       component: TopItemView
+    },
+
+
+    {
+      path: '/category',
+      name: 'category',
+      component: CategoryListView
+    },
+    {
+      path: '/category/:id',
+      name: 'category-item',
+      component: CategoryItemView
     }
   ]
 })

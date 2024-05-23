@@ -16,6 +16,8 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/picks-list">picks-list</RouterLink>
         <RouterLink to="/setmenu-list">setmenu-list</RouterLink>
         <RouterLink to="/top-list">top-list</RouterLink>
+
+        <RouterLink to="/category">category</RouterLink>
       </nav>
     </div>
   </header>

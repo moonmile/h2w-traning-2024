@@ -11,8 +11,8 @@
             <input type="text" id="slug" v-model="item.slug" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" id="title" v-model="item.title" class="form-control">
+            <label for="title" class="form-label">Name</label>
+            <input type="text" id="title" v-model="item.name" class="form-control">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -58,7 +58,7 @@ import axios from 'axios';
 interface Product {
     id: number;
     slug: string;
-    title: string;
+    name: string;
     description: string;
     image: string;
     sortid: number;
@@ -74,7 +74,7 @@ const id = ref(router.currentRoute.value.params.id);
 const item = ref<Product>({ 
     id: 0, 
     slug: '', 
-    title: '', 
+    name: '',
     description: '', 
     image: '', 
     sortid: 0, 
@@ -112,7 +112,7 @@ async function onupdate() {
     console.log('onupdate');
     var url = 'http://localhost:8000/api/products/' + id.value;
     const response = await axios.put(url, item.value)
-    router.push({ name: 'product' });
+    router.push({ name: 'product-list' });
 }
 
 /**
@@ -121,7 +121,7 @@ async function onupdate() {
  */
 function oncancel() {
     console.log('oncancel');
-    router.push({ name: 'product' });
+    router.push({ name: 'product-list' });
 }
 
 
