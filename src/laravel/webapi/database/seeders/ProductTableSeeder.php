@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\ProductCategoryLink ;
 
 
 
@@ -61,6 +62,15 @@ class ProductTableSeeder extends Seeder
 
         foreach ($products as $product) {
             Product::create($product);
+        }
+
+        $productCategoryLink = [
+            [ 'product_id' => 1, 'category_id' => 2 ],
+            [ 'product_id' => 2, 'category_id' => 2 ],
+            [ 'product_id' => 3, 'category_id' => 2 ],
+        ];
+        foreach ($productCategoryLink as $link) {
+            ProductCategoryLink::create($link);
         }
     }
 }

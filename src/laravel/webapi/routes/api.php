@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::apiResource('products', ApiProductController::class);
 Route::apiResource('categories', ApiCategoryController::class);
+
+// カテゴリ slug に紐づく商品一覧
+Route::get('categories/{category_slug}/products', [ApiCategoryController::class, 'products']);

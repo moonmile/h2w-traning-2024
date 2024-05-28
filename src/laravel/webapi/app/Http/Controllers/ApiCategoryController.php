@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -17,6 +18,21 @@ class ApiCategoryController extends Controller
         $items = Category::all();
         return response()->json([
             'data' => $items,
+        ], 200);
+    }
+
+
+
+    /**
+     * カテゴリの slug を指定して、商品一覧を取得する
+     */
+    public function products( $category_slug )
+    {
+        $items = Category::with('products')
+                    ->where('slug', $category_slug)
+                    ->get();
+        return response()->json([
+            'data' => $items
         ], 200);
     }
 
