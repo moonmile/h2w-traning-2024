@@ -58,9 +58,10 @@ import axios from 'axios';
 interface Product {
     id: number;
     slug: string;
-    title: string;
+    name: string;
     description: string;
     image: string;
+    price: string;
     sortid: number;
     display: boolean;
     created_at: string;
@@ -74,9 +75,10 @@ const id = ref(router.currentRoute.value.params.id);
 const item = ref<Product>({ 
     id: 0, 
     slug: '', 
-    title: '', 
+    name: '',
     description: '', 
     image: '', 
+    price: '',
     sortid: 0, 
     display: false, 
     created_at: '', 
@@ -112,7 +114,7 @@ async function onupdate() {
     console.log('onupdate');
     var url = 'http://localhost:8000/api/products/' + id.value;
     const response = await axios.put(url, item.value)
-    router.push({ name: 'product' });
+    router.push({ name: 'product-list' });
 }
 
 /**
@@ -121,7 +123,7 @@ async function onupdate() {
  */
 function oncancel() {
     console.log('oncancel');
-    router.push({ name: 'product' });
+    router.push({ name: 'product-list' });
 }
 
 
