@@ -23,6 +23,10 @@
             <input type="text" id="image" v-model="item.image" class="form-control">
         </div>
         <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" id="price" v-model="item.price" class="form-control">
+        </div>
+        <div class="mb-3">
             <label for="sortid" class="form-label">Sort ID</label>
             <input type="number" id="sortid" v-model="item.sortid" class="form-control">
         </div>
