@@ -11,8 +11,8 @@
             <input type="text" id="slug" v-model="item.slug" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" id="title" v-model="item.title" class="form-control">
+            <label for="title" class="form-label">Name</label>
+            <input type="text" id="title" v-model="item.name" class="form-control">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
