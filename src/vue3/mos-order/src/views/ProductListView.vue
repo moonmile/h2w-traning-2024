@@ -28,14 +28,6 @@
     </div>
 </template>
 
-<!--
-            <li v-for="product in products" :key="product.id">
-                {{ product.name }} - {{ product.price }}
-                
-            </li>
-
--->
-
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -55,7 +47,7 @@ const cartStore = useCartStore();
 
 
 async function onload() {
-    const url = `http://localhost:8000/api/products/${slug.value}/products`;
+    const url = `http://localhost:8000/api/categories/${slug.value}/products`;
     console.log( url )
     const response = await axios.get(url);
     products.value = response.data.data[0].products; 
@@ -68,7 +60,7 @@ onMounted(onload) ;
  */
 function clickCart(item) {
     console.log('clickCart')
-    cartStore.addProcuct(item);
+    cartStore.addProduct(item);
 
     alert('clickCart ' + item.name)
 }
