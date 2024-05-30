@@ -4,7 +4,7 @@
         <div class="ProductLink-wrap">
             <ul v-for="product in products" :key="product.id" class="ProductLink-list">
                 <li class="ProductLink-item">
-                    <a class="ProductLink" href="/about">
+                    <a class="ProductLink" href="/about"><!-- herf="カートに入れる画面" -->
                         <div class="ProductLink-inner">
                             <div class="ProductLink-img">
                                 <img :src="product.image" alt="product.name">
@@ -15,7 +15,7 @@
                                 </p>
                                 <ul class="price-list">
                                     <li class="price">
-                                        {{ product.price }}
+                                        ￥{{ product.price }}
                                     </li>
                                 </ul>
                             </div>
@@ -38,16 +38,18 @@ const router = useRouter();
 const slug = ref(router.currentRoute.value.params.slug);
 
 const products = ref([
-                { id: 1, name: 'Product 1', price: 10 },
-                { id: 2, name: 'Product 2', price: 20 },
-                { id: 3, name: 'Product 3', price: 30 },
-            ]);
+    { id: 1, slug: "slug 1", name: "Product 1", description: "description", image: "image 1", price: "price 1", sortid: 1, display: false, created_at: "created_at 1", updated_at: "updated_at 1", is_delete: false },
+    { id: 2, slug: "slug 2", name: "Product 2", description: "description", image: "image 2", price: "price 2", sortid: 2, display: false, created_at: "created_at 2", updated_at: "updated_at 2", is_delete: false },
+    { id: 3, slug: "slug 3", name: "Product 3", description: "description", image: "image 3", price: "price 3", sortid: 3, display: false, created_at: "created_at 3", updated_at: "updated_at 3", is_delete: false },
+    { id: 4, slug: "slug 4", name: "Product 4", description: "description", image: "image 4", price: "price 4", sortid: 4, display: false, created_at: "created_at 4", updated_at: "updated_at 4", is_delete: false },
+    { id: 5, slug: "slug 5", name: "Product 5", description: "description", image: "image 5", price: "price 5", sortid: 5, display: false, created_at: "created_at 5", updated_at: "updated_at 5", is_delete: false },
+]);
 
 const cartStore = useCartStore();
 
 
 async function onload() {
-    const url = `http://localhost:8000/api/categories/${slug.value}/products`;
+    const url = `http://localhost:8000/api/categorie/${slug.value}/products`;
     console.log( url )
     const response = await axios.get(url);
     products.value = response.data.data[0].products; 
@@ -134,6 +136,19 @@ h1 {
     border-top: solid 1px #007749;
     /* << change theme */
     padding-top: 25px;
+}
+
+.ProductLink-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.price-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;    
 }
 
 </style>
