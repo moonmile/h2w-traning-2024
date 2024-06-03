@@ -42,6 +42,7 @@
             </li>
         </ul>
     </div>
+    
 </template>
 
 <!--
@@ -94,6 +95,8 @@ onMounted(onload2) ;
 /* Add your custom styles here */
 
 
+
+
 .menu-btn {
     width: 100%;
   padding: 0.9375rem 1.25rem;
@@ -134,12 +137,12 @@ onMounted(onload2) ;
   -webkit-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
 }
-
+/*
 .menu-btn .menu-text.is-open::before {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
-
+*/
 .menu-btn .menu-text::after {
   content: "";
   position: absolute;
@@ -153,13 +156,14 @@ onMounted(onload2) ;
   border-radius: 2px;
 }
 
+/*
 .accordion-menu-inner .menulink-list {
   margin: 0 -0.875rem;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
 }
-
+*/
 
 
 
@@ -201,7 +205,7 @@ onMounted(onload2) ;
     /* << C's modified */
     padding-left: 14px;
     padding-right: 14px;
-    margin-bottom: 28px;
+    margin-bottom: 60px;
 }
 
 .ProductLink:hover .ProductLink-inner {

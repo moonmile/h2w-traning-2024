@@ -34,8 +34,8 @@
                     <td>{{ product.description }}</td>
                     <td>{{ product.image }}</td>
                     <td>{{ product.price + '円' }}</td>
-                    <td><input type="checkbox"></td>
-                    <td><input type="checkbox"></td>
+                    <td class="checkbox"><input type="checkbox"></td>
+                    <td class="checkbox"><input type="checkbox"></td>
                     <td>
                         <button class="btn btn-primary" @click="onedit(product)">編集</button>        
                         <button class="btn btn-danger" @click="ondelete(product)">削除</button>        
@@ -134,6 +134,10 @@ select {
     text-align: center;
     position: relative;
     left: 8%;
+}
+
+.checkbox {
+    text-align: center;
 }
 
 </style>

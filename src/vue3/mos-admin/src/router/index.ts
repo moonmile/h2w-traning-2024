@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import CategoriesListView from '@/views/CategoriesListView.vue'
 import CategoriesItemView from '@/views/CategoriesItemView.vue'
 import ProductListView from '@/views/ProductListView.vue'
-import ProductItemview from '@/views/ProductItemView.vue'
+import ProductItemView from '@/views/ProductItemview.vue'
 import PicksListView from '@/views/PicksListView.vue'
 import PicksItemView from '@/views/PicksItemView.vue'
 import SetMenuListView from '@/views/SetMenuListView.vue'
@@ -50,7 +50,7 @@ const router = createRouter({
     {
       path: '/product-list/:id',
       name: 'product-item',
-      component: ProductItemview
+      component: ProductItemView
     },
     
     {
