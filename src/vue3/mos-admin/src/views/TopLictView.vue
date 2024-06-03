@@ -59,7 +59,7 @@ async function onload() {
     console.log('onload');
     const url = 'http://localhost:8000/api/products';
     const response = await axios.get(url);
-    tops.value = response.data.data;  // ソート順にする .sort((a, b) => a.sortid - b.sortid);
+    tops.value = response.data.data.sort((a, b) => a.sortid - b.sortid);
 }
 onMounted(onload) ;
 
@@ -77,11 +77,27 @@ function onedit(item: any) {
     router.push({ name: 'top-item', params: { id: item.id } });
 }
 
-// 削除ボタンを押すと、その行を非表示にする
+// 削除ボタン
 function ondelete(item) {
-    console.log('ondelete ' + item.name);
-    item.hidden = true;
-}
+    console.log('ondelete' + item.name);
+    // 削除確認
+    if (confirm('削除しますか？')) {
+        // 削除処理
+        deleteProduct(item);
+    }
+};
+
+// 削除処理 DBから削除
+async function deleteProduct(item) {
+    try {
+        const url = `http://localhost:8000/api/products/${item.id}`;
+        await axios.delete(url);
+        tops.value = tops.value.filter(top => top.id !== item.id);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 
 // 上へボタンを押したら一つ上に移動する（順番はsortidで判別する
 function onUp(item) {

@@ -50,6 +50,7 @@
         </table>
     </div>
     <button class="btn btn-primary" @click="onload">一覧を取得</button>
+    <button class="btn btn-primary" @click="onRestore">復元</button>
 </template>
 
 <script setup lang="ts">
@@ -66,7 +67,7 @@ const categories = ref([
 async function onload() {
     const url = "http://localhost:8000/api/categories";
     const response = await axios.get(url);
-    categories.value = response.data.data;  // ソート順にする .sort((a, b) => a.sortid - b.sortid);
+    categories.value = response.data.data.sort((a, b) => a.sortid - b.sortid);
 }
 onMounted(onload);
 
@@ -86,17 +87,71 @@ function onedit(item) {
 // 削除ボタン
 function ondelete(item) {
     console.log('ondelete' + item.title);
+    // 削除確認
+    if (confirm('削除しますか？')) {
+        // 削除処理
+        deleteCategory(item);
+    }
 };
+
+// 削除処理 DBから削除
+async function deleteCategory(item) {
+    try {
+        const url = `http://localhost:8000/api/categories/${item.id}`;
+        await axios.delete(url);
+        categories.value = categories.value.filter(category => category.id !== item.id);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+// 復元ボタン
+function onRestore(item) {
+    console.log('onRestore' + item.title);
+    // 復元処理
+    restoreCategory(item);
+};
+
+// 復元処理
+async function restoreCategory(item) {
+    try {
+        const url = `http://localhost:8000/api/categories/${item.id}/restore`;
+        await axios.patch(url);
+        categories.value = categories.value.map(category => {
+            if (category.id === item.id) {
+                category.is_delete = false;
+            }
+            return category;
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
 
 // 上へボタン
 function onUp(item) {
     console.log('onUp' + item.title);
+    const currentIndex = categories.value.findIndex(category => category.sortid === item.sortid);
+    if (currentIndex > 0) {
+        const temp = categories.value[currentIndex - 1];
+        categories.value[currentIndex - 1] = categories.value[currentIndex];
+        categories.value[currentIndex] = temp;
+    }
 };
 
 // 下へボタン
 function onDown(item) {
     console.log('onDown' + item.title);
+    const currentIndex = categories.value.findIndex(category => category.sortid === item.sortid);
+    if (currentIndex < categories.value.length - 1) {
+        const temp = categories.value[currentIndex + 1];
+        categories.value[currentIndex + 1] = categories.value[currentIndex];
+        categories.value[currentIndex] = temp;
+    }
 };
+
 
 
 // 削除ボタンを押すと、その行を非表示にする

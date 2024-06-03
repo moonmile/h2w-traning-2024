@@ -39,8 +39,8 @@
                     <td>
                         <button class="btn btn-primary" @click="onedit(product)">編集</button>        
                         <button class="btn btn-danger" @click="ondelete(product)">削除</button>        
-                        <button class="btn btn-secondary" @click="onup(product)">上へ</button>        
-                        <button class="btn btn-secondary" @click="ondown(product)">下へ</button>        
+                        <button class="btn btn-secondary" @click="onUp(product)">上へ</button>        
+                        <button class="btn btn-secondary" @click="onDown(product)">下へ</button>        
                     </td>
                 </tr>
             </tbody>
@@ -64,7 +64,7 @@ const products = ref([
 async function onload() {
     const url = 'http://localhost:8000/api/products';
     const response = await axios.get(url);
-    products.value = response.data.data ;
+    products.value = response.data.data.sort((a, b) => a.sortid - b.sortid);
 }
 onMounted(onload);
 
@@ -84,18 +84,47 @@ function onedit(item) {
 
 // 削除ボタン
 function ondelete(item) {
-    console.log('ondelete');
-}
+    console.log('ondelete' + item.name);
+    // 削除確認
+    if (confirm('削除しますか？')) {
+        // 削除処理
+        deleteProduct(item);
+    }
+};
+
+// 削除処理 DBから削除
+async function deleteProduct(item) {
+    try {
+        const url = `http://localhost:8000/api/products/${item.id}`;
+        await axios.delete(url);
+        products.value = products.value.filter(product => product.id !== item.id);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 
 // 上へボタン
-function onup(item) {
-    console.log('onup');
-}
+function onUp(item) {
+    console.log('onUp' + item.title);
+    const currentIndex = products.value.findIndex(product => product.sortid === item.sortid);
+    if (currentIndex > 0) {
+        const temp = products.value[currentIndex - 1];
+        products.value[currentIndex - 1] = products.value[currentIndex];
+        products.value[currentIndex] = temp;
+    }
+};
 
 // 下へボタン
-function ondown(item) {
-    console.log('ondown');
-}
+function onDown(item) {
+    console.log('onDown' + item.title);
+    const currentIndex = products.value.findIndex(product => product.sortid === item.sortid);
+    if (currentIndex < products.value.length - 1) {
+        const temp = products.value[currentIndex + 1];
+        products.value[currentIndex + 1] = products.value[currentIndex];
+        products.value[currentIndex] = temp;
+    }
+};
 
 
 </script>

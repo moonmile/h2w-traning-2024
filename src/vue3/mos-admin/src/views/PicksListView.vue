@@ -71,7 +71,7 @@ async function onload() {
     console.log('onload');
     const url = 'http://localhost:8000/api/products';
     const response = await axios.get(url);
-    picks.value = response.data.data;  // ソート順にする .sort((a, b) => a.sortid - b.sortid);
+    picks.value = response.data.data.sort((a, b) => a.sortid - b.sortid);
 }
 onMounted(onload) ;
 
