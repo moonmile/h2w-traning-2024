@@ -15,12 +15,12 @@
                                 </p>
                                 <ul class="price-list">
                                     <li class="price">
-                                        ￥{{ product.price }}
+                                        ￥{{ product.price }}<button class="btn btn-primary" @click="clickCart(product)">カート</button>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <button class="btn btn-primary" @click="clickCart(product)">カート</button>
+                        
                     </a>
                 </li>
             </ul>
@@ -75,6 +75,15 @@ h1 {
     color: blue;
 }
 
+.btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+
+
+}
+
 .ProductLink-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -112,11 +121,13 @@ h1 {
     /* << C's modified */
     padding-left: 14px;
     padding-right: 14px;
-    margin-bottom: 28px;
+    margin-bottom: 60px;
+    width: 300px;
+    height: 400px;
 }
 
 .ProductLink:hover .ProductLink-inner {
-    opacity: 0.7;
+    opacity: .7;
 }
 
 .ProductLink-inner {
@@ -129,13 +140,16 @@ h1 {
 .ProductLink-img {
     text-align: center;
     margin: -15px -20px 0;
+    background-color: aqua;
+    width: 300px;
+    height: 240px;
 }
 
 .ProductLink-name {
     /* change theme >> */
     border-top: solid 1px #007749;
     /* << change theme */
-    padding-top: 25px;
+    padding-top: 15px;
 }
 
 .ProductLink-name {
