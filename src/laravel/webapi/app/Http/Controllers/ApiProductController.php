@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /*
 
@@ -57,9 +58,22 @@ class ApiProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /*
     public function index()
     {
         $items = Product::all();
+        return response()->json([
+            'data' => $items
+        ], 200);
+    }
+    */
+    public function index()
+    {
+        // sortid でソートし、ただし display が true のものだけ取得
+        $items = Product::where('display', true)
+            ->orderBy('sortid', 'asc')
+            ->get();
+
         return response()->json([
             'data' => $items
         ], 200);
@@ -86,7 +100,7 @@ class ApiProductController extends Controller
         $product->save();
 
         return response()->json([
-            'message' => 'Category created successfully',
+            'message' => 'Product created successfully',
             'data' => $product
         ], 201);
     }
