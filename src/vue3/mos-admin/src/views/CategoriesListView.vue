@@ -119,7 +119,7 @@ async function restoreCategory(item) {
         await axios.patch(url);
         categories.value = categories.value.map(category => {
             if (category.id === item.id) {
-                category.is_delete = false;
+                category.is_delete = false; // 今回はis_deleteをfalseする処理ができているが、新しく作られてしまうこともあるので注意。
             }
             return category;
         });
@@ -127,19 +127,36 @@ async function restoreCategory(item) {
         console.error(error);
     }
 };
+//　ラムダ式で書いているが、functionで書いても良い。行が長くなるときはfunctionで書く。
+//  function内で宣言した変数は外では使えない。classでまとめて記述するのも一つの方法。
+//　121行目のcategoryは仮変数である。JavaScript以外で、オブジェクト以外を当てはめるとエラーになることも。
 
 
 
-// 上へボタン
+// 上へボタン 上の行と選択した行のsortidを交換する
+// （上のsortidを選択した行にいれる処理＋選択した行のsortidを上の行の要素に入れる処理）アップデート二回
 function onUp(item) {
     console.log('onUp' + item.title);
     const currentIndex = categories.value.findIndex(category => category.sortid === item.sortid);
     if (currentIndex > 0) {
-        const temp = categories.value[currentIndex - 1];
-        categories.value[currentIndex - 1] = categories.value[currentIndex];
-        categories.value[currentIndex] = temp;
+        const tempSortid = categories.value[currentIndex - 1].sortid;
+        categories.value[currentIndex - 1].sortid = item.sortid;
+        item.sortid = tempSortid;
+        updateSortid(item);
+        updateSortid(categories.value[currentIndex - 1]);
     }
 };
+
+async function updateSortid(item) {
+    try {
+        const url = `http://localhost:8000/api/categories/${item.sortid}`;
+        await axios.patch(url, { sortid: item.sortid });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 
 // 下へボタン
 function onDown(item) {

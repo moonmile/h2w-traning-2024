@@ -63,8 +63,9 @@ onMounted(onload) ;
 function clickCart(item) {
     console.log('clickCart')
     cartStore.addProduct(item);
+    alert('clickCart ' + item.name);
+    
 
-    alert('clickCart ' + item.name)
 }
 
 
