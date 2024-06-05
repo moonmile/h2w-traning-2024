@@ -4,7 +4,7 @@
         <div class="ProductLink-wrap">
             <ul v-for="product in products" :key="product.id" class="ProductLink-list">
                 <li class="ProductLink-item">
-                    <a class="ProductLink" href="/about"><!-- herf="カートに入れる画面" -->
+                    <a class="ProductLink" href=""><!-- herf="カートに入れる画面" -->
                         <div class="ProductLink-inner">
                             <div class="ProductLink-img">
                                 <img :src="product.image" alt="product.name">
@@ -36,6 +36,8 @@ import { useCartStore } from '../stores/Cart';
 
 const router = useRouter();
 const slug = ref(router.currentRoute.value.params.slug);
+const cartStore = useCartStore();
+
 
 const products = ref([
     { id: 1, slug: "slug 1", name: "Product 1", description: "description", image: "image 1", price: "price 1", sortid: 1, display: false, created_at: "created_at 1", updated_at: "updated_at 1", is_delete: false },
@@ -45,7 +47,6 @@ const products = ref([
     { id: 5, slug: "slug 5", name: "Product 5", description: "description", image: "image 5", price: "price 5", sortid: 5, display: false, created_at: "created_at 5", updated_at: "updated_at 5", is_delete: false },
 ]);
 
-const cartStore = useCartStore();
 
 
 async function onload() {
@@ -62,7 +63,7 @@ onMounted(onload) ;
  */
 function clickCart(item) {
     console.log('clickCart')
-    cartStore.addProduct(item);
+    cartStore.addCart(item);
     alert('clickCart ' + item.name);
     
 

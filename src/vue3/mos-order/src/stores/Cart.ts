@@ -1,6 +1,24 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
+export const useCartStore = defineStore('cart', {
+    state: () => ({
+        items: [] as Product[]
+    }),
+    actions: {
+        addCart(value: Product) {
+            console.log('addProduct:' +  value)
+            this.items.push(value)
+        }
+    }
+})
+
+
+
+
+
+
+/*
 export const useCartStore = defineStore('cart', () => {
     const products = ref<Product>([])
     
@@ -11,7 +29,7 @@ export const useCartStore = defineStore('cart', () => {
 
     return { products, addProduct }
   })
-  
+*/
 
 interface Product {
     id: number;
