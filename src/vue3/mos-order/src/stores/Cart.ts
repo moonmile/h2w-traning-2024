@@ -5,10 +5,23 @@ export const useCartStore = defineStore('cart', {
     state: () => ({
         items: [] as Product[]
     }),
+    getters: {
+        total: (state) => {
+            return state.items.reduce((total, item) => {
+                return total + item.price * item.quantity;
+            }, 0);
+        },
+    },
     actions: {
         addCart(value: Product) {
-            console.log('addProduct:' +  value)
-            this.items.push(value)
+            const item = this.items.find((item) => item.id === value.id)
+            if (item) {
+                console.log( value.name + 'の数量を1個追加しました')
+                item.quantity++;
+            } else {
+                console.log( value.name + 'をカートに入れました')
+                this.items.push({ ...value, quantity: 1 })
+            }
         }
     }
 })
@@ -43,5 +56,6 @@ interface Product {
     created_at: string;
     updated_at: string;
     is_delete: boolean;
+    quantity: number;
 }
 

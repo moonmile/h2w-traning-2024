@@ -4,6 +4,8 @@ import TopView from '../views/TopView.vue'
 import CategoryView from '../views/CategoryView.vue'
 import ProductListView from '../views/ProductListView.vue'
 import CartView from '@/views/CartView.vue'
+import PicksListView from '@/views/PicksListView.vue'
+import ProductView from '@/views/ProductView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +42,18 @@ const router = createRouter({
       path: '/cart',
       name: 'cart',
       component: CartView
+    }
+    ,
+    {
+      path: '/picks-list',
+      name: 'picks-list',
+      component: PicksListView
+    }
+    ,
+    {
+      path: '/product/',
+      name: 'product',
+      component: ProductView
     }
   ]
 })

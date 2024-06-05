@@ -36,6 +36,8 @@ function clickLogin() {
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/top">TOP</RouterLink>
         <RouterLink to="/category">カテゴリー</RouterLink>
+        <RouterLink to="/product">商品一覧</RouterLink>
+        <RouterLink to="/picks-list">お勧め商品一覧</RouterLink>
         <RouterLink to="/cart">カート</RouterLink>
       </nav>
     </div>

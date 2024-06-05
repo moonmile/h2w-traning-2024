@@ -94,7 +94,7 @@ function ondelete(item) {
     }
 };
 
-// 削除処理 DBから削除
+// 削除処理 DBから削除 一覧から削除にするため、is_deleteをtrueにするのが正解
 async function deleteCategory(item) {
     try {
         const url = `http://localhost:8000/api/categories/${item.id}`;
