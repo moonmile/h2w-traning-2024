@@ -12,7 +12,7 @@
     </div>
     <br />
 
-    <Carousel :itemsToShow="1.5" :wrapAround="true">
+    <Carousel :itemsToShow="1.8" :wrapAround="true">
         <slide v-for="image in images" :key="image.id" class="slide-list">
             <a href="/product-list/special">
                 <img width="500" height="300" src="../assets/top-hamburger.jpg" alt="ハンバーガー"/>

@@ -39,6 +39,7 @@ function clickLogin() {
         <RouterLink to="/product">商品一覧</RouterLink>
         <RouterLink to="/picks-list">お勧め商品一覧</RouterLink>
         <RouterLink to="/cart">カート</RouterLink>
+        <RouterLink to="/order-list">注文画面</RouterLink>
       </nav>
     </div>
   </header>
