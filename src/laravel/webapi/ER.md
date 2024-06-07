@@ -17,7 +17,7 @@ create table Products (
 	display bool,		-- 表示有無
     created_at datetime,	-- 作成日時
     updated_at datetime,	-- 更新日時
-	is_delete bool		-- 削除フラグ
+    deleted_at datetime		-- 削除フラグ
 );
 
 
@@ -34,7 +34,7 @@ create table Categories (
 	display bool,		-- 表示有無
 	created_at datetime,	-- 作成日時
 	updated_at datetime,	-- 更新日時
-	is_delete bool		-- 削除フラグ
+    deleted_at datetime		-- 削除フラグ
 );
 
 
@@ -58,7 +58,7 @@ create table Stores (
 	address varchar(255),	-- 店舗住所
 	created_at datetime,	-- 作成日時
 	updated_at datetime,	-- 更新日時
-	is_delete bool		-- 削除フラグ
+    deleted_at datetime		-- 削除フラグ
 );
 
 --
@@ -70,7 +70,7 @@ create table store_product_link (
     stock int,				    -- 在庫数
     created_at datetime,	    -- 作成日時
     updated_at datetime,	    -- 更新日時
-	is_delete bool		        -- 削除フラグ
+    deleted_at datetime		-- 削除フラグ
 );
 
 
@@ -87,7 +87,7 @@ create table product_recommendations (		-- お薦めリスト
 	display	bool,							-- 表示有無
     created_at datetime,	    -- 作成日時
     updated_at datetime,	    -- 更新日時
-	is_delete bool		        -- 削除フラグ
+    deleted_at datetime		-- 削除フラグ
 );
 
 
@@ -127,7 +127,7 @@ create table Customers (
 	lastlogin datetime,			-- 最終ログイン
 	created_at datetime,	-- 作成日時
 	updated_at datetime,	-- 更新日時
-	is_delete bool		-- 削除フラグ
+    deleted_at datetime		-- 削除フラグ
 );
 
 

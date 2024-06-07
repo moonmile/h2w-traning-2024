@@ -11,9 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // 一旦やり直し
-        Schema::dropIfExists('categories');
-
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('slug', 100)->nullable();

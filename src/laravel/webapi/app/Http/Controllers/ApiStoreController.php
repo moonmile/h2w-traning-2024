@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use App\Models\ProductRecommendation;
 use Illuminate\Http\Request;
+
 
 class ApiStoreController extends Controller
 {
@@ -63,6 +65,46 @@ class ApiStoreController extends Controller
         }
     }
 
+    /**
+     * Display the products of the specified resource.
+     */
+    public function products($id)
+    {
+        $store = Store::with('products.product')->findOrFail($id);
+
+        if ( $store ) {
+            return response()->json([
+                'message' => 'OK',
+                'data' => $store
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found',
+            ], 200);
+        }
+    }
+
+    /**
+     * Display the recommendations of the specified resource.
+     */
+    public function recommendations($id)
+    {
+        $recommendations = ProductRecommendation::with('product')
+            ->where('store_id', $id)
+            ->where('display', true)
+            ->get();
+
+        if ( $recommendations ) {
+            return response()->json([
+                'message' => 'OK',
+                'data' => $recommendations
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Not found',
+            ], 200);
+        }
+    }    
 
     /**
      * Update the specified resource in storage.
