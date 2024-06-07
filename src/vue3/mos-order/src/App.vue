@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import router from './router';
 
 
 
@@ -21,12 +22,20 @@ function clickLogin() {
   console.log('clickLogin')
   alert('clickLogin')
 }
+
+function clickCart() {
+  router.push('/cart')
+}
+
+
+
 </script>
 
 <template>
   <header>
     <div>
       <h1>ハンバーガーのネット注文</h1>
+      <button class="btn btn-primary" @click="clickCart">カート</button>
       <button class="btn btn-primary" @click="clickSignIn">会員登録</button>
       <button class="btn btn-primary" @click="clickLogin">ログイン</button>
     </div>

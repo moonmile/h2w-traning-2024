@@ -1,25 +1,43 @@
 <template>
-    <h2>カートの中身</h2>
-    <p v-show="!items.length"><i>カートに商品は入っていません。</i></p>
-    <ul>
-        <li v-for="product in items" :key="product.id">
-            <hr>
-            <img :src="product.image" alt="product.name">
-            {{ product.name }} - ¥{{ product.price }}
-            <!--増加-->
-            <button @click="incrementQuantity(product); updateQuantity(items)">+</button>
-            <!--数量-->
-            {{ product.quantity }}
-            <!--減少-->
-            <button @click="decrementQuantity(product); updateQuantity(items)">-</button>
-            個
-            <br>
-            <!--小計-->
-            ¥{{ product.price * product.quantity }}
-            <!--削除ボタン-->
-            <button @click="removeCart(product.id)">削除</button>
-        </li>
-    </ul>
+    <div class="Cart-wrap">
+        <h2>カートの中身</h2>
+        <p v-show="!items.length"><i>カートに商品は入っていません。</i></p>
+    
+        <ul class="Cart-list">
+            <li v-for="product in items" :key="product.id" class="Cart-item">
+                <div class="Cart-inner">
+                    <hr>
+                    <div class="Cart-img">
+                        <!--商品画像-->
+                        <img :src="product.image" alt="product.name">
+                    </div>
+                    <div class="Cart-name">
+                        <!--商品名-->
+                        {{ product.name }}
+                    </div>
+                    <div class="Cart-price">
+                        ¥{{ product.price }}
+                    </div>
+                    <div class="Cart-quantity">
+                        <!--増加-->
+                        <button @click="incrementQuantity(product); updateQuantity(items)">+</button>
+                        <!--数量-->
+                        {{ product.quantity }}
+                        <!--減少-->
+                        <button @click="decrementQuantity(product); updateQuantity(items)">-</button>
+                        個
+                    </div>
+                    <div class="Cart-subtotal">
+                        <!--小計-->
+                        ¥{{ product.price * product.quantity }}
+                    </div>
+                    <!--削除ボタン-->
+                    <button @click="removeCart(product.id)">削除</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <hr>
     <p>合計: ¥{{ total }}</p>
     <hr>
     <!--購入画面へ-->
@@ -70,7 +88,23 @@ const clickOrder = () => {
 };
 
 
+
+
 </script>
 
 <style scoped>
+
+.Cart-wrap {
+    background-color: beige;
+    padding: 20px;
+}
+
+.Cart-item {
+    list-style: none;
+}
+
+.Cart-inner {
+    background-color: white;
+}
+
 </style>

@@ -22,6 +22,11 @@ import { storeToRefs } from 'pinia';
 
 const { items, total } = storeToRefs(useCartStore());
 
+// 注文確定
+function clickOrder() {
+    alert('注文確定しました。');
+}
+
 </script>
 
 <style scoped>
