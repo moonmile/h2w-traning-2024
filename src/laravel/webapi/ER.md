@@ -20,6 +20,7 @@ create table Products (
 	is_delete bool		-- 削除フラグ
 );
 
+
 --
 -- カテゴリテーブル
 --
@@ -108,23 +109,12 @@ create table orders (		-- 注文履歴
 --
 create table sales (
 	id int not null,
+    order_id int not null       -- 注文id
 	product_id int not null, 	-- 商品id
 	quantity int, 				-- 販売数量
 	sale_date datetime,			-- 販売日時
     created_at datetime,	    -- 作成日時
     updated_at datetime,	    -- 更新日時
-);
-
-
--- 
--- 注文販売の連携テーブル
---
-create table order_sale_link (
-	id int not null,
-    order_id int not null,      -- 注文ID
-    sale_id int not null,       -- 販売ID
-    created_at datetime,        -- 作成日時
-    updated_at datetime         -- 更新日時
 );
 
 -- 
@@ -229,17 +219,10 @@ erDiagram
 
     entity "sales" {
         id int
+        order_id int
         product_id int
         quantity int
         sale_date datetime
-        created_at datetime
-        updated_at datetime
-    }
-
-    entity "order_sale_link" {
-        id int
-        order_id int
-        sale_id int
         created_at datetime
         updated_at datetime
     }
@@ -252,8 +235,6 @@ erDiagram
     Products ||--|{ product_recommendations : "has"
     Stores ||--|{ orders : "has"
     orders ||--|{ sales : "has"
-    orders ||--|{ order_sale_link : "has"
-    sales ||--|{ order_sale_link : "has"
 
 ```
 

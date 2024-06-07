@@ -14,6 +14,7 @@ return new class extends Migration
 
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->integer('order_id')->unsigned()->nullable(false);
             $table->integer('product_id')->unsigned()->nullable(false);
             $table->integer('quantity')->nullable();
             $table->dateTime('sale_date')->nullable();
