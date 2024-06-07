@@ -51,7 +51,6 @@ class ApiCategoryController extends Controller
         $category->display = $request->input('display');
         $category->created_at = now();
         $category->updated_at = now();
-        $category->is_delete = false;
         $category->save();
 
         return response()->json([

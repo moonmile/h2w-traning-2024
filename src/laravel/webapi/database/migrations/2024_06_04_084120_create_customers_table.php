@@ -6,23 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
-    
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('title');
-            $table->text('description');
-            $table->string('image');
-            $table->integer('sortid');
-            $table->boolean('display');
+            $table->string('name', 100);
+            $table->string('hash', 100)->nullable();
+            $table->dateTime('lastlogin')->nullable();
             $table->timestamps();
-            $table->boolean('is_delete');
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('customers');
     }
 };

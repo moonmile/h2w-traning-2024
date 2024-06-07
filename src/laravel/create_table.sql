@@ -60,6 +60,9 @@ create table Customers (
 	name varchar(100),			-- 顧客id
 	hash varchar(100),			-- 顧客名
 	lastlogin datetime,			-- 最終ログイン
+	created_at datetime,	-- 作成日時
+	updated_at datetime,	-- 更新日時
+	is_delete bool		-- 削除フラグ
 );
 
 --

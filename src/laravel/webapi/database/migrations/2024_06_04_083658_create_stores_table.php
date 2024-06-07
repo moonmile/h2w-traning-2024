@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('image')->nullable()->change();
+        Schema::create('stores', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 100);
+            $table->string('address', 255);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('image')->nullable(false)->default(' ')->change();
-        });
+        Schema::dropIfExists('stores');
     }
 };

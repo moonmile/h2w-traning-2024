@@ -6,20 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        // 商品カテゴリの連携テーブルを作成する
-        Schema::create('product_category_link', function (Blueprint $table) {
+
+        Schema::create('store_product_link', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->integer('stock')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('store_id')->references('id')->on('stores');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_categories');
+        Schema::dropIfExists('store_product_link');
     }
 };

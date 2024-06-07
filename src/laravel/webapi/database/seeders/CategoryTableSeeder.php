@@ -15,31 +15,89 @@ class CategoryTableSeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'slug' => 'special',
+            'slug' => 'special1',
             'title' => '今月のお薦め',
             'description' => '今月のお薦め商品を紹介します。',
             'image' => '',
             'sortid' => 1,
             'display' => true,
-            'is_delete' => false,
         ]);
         Category::create([
-            'slug' => 'main',
-            'title' => 'メインメニュー',
-            'description' => 'メインメニューのハンバーガーを紹介します。',
+            'slug' => 'special2',
+            'title' => 'ネット注文特別価格メニュー',
+            'description' => ' ',
             'image' => '',
             'sortid' => 2,
             'display' => true,
-            'is_delete' => false,
         ]);
         Category::create([
-            'slug' => 'sidemenu',
-            'title' => 'サイドメニュー',
-            'description' => 'サウドメニューのポテトやドリンクを紹介します。',
+            'slug' => 'special3',
+            'title' => '限定メニュー',
+            'description' => ' ',
             'image' => '',
             'sortid' => 3,
             'display' => true,
-            'is_delete' => false,
         ]);
+
+        Category::create([
+            'slug' => 'main1',
+            'title' => 'メインメニュー',
+            'description' => 'メインメニューのハンバーガーを紹介します。',
+            'image' => '',
+            'sortid' => 10,
+            'display' => true,
+        ]);
+        Category::create([
+            'slug' => 'main2',
+            'title' => 'ハンバーガー',
+            'description' => ' ',
+            'image' => '',
+            'sortid' => 11,
+            'display' => true,
+        ]);
+        Category::create([
+            'slug' => 'main3',
+            'title' => 'ホットドック',
+            'description' => ' ',
+            'image' => '',
+            'sortid' => 12,
+            'display' => true,
+        ]);
+        Category::create([
+            'slug' => 'main4',
+            'title' => 'ソイパティ',
+            'description' => ' ',
+            'image' => '',
+            'sortid' => 13,
+            'display' => true,
+        ]);
+
+
+
+        Category::create([
+            'slug' => 'sidemenu1',
+            'title' => 'サイドメニュー',
+            'description' => 'サイドメニューのポテトやドリンクを紹介します。',
+            'image' => '',
+            'sortid' => 20,
+            'display' => true,
+        ]);
+        Category::create([
+            'slug' => 'sidemenu2',
+            'title' => 'ドリンク・スープ',
+            'description' => ' ',
+            'image' => '',
+            'sortid' => 21,
+            'display' => true,
+        ]);
+        Category::create([
+            'slug' => 'sidemenu3',
+            'title' => 'デザート',
+            'description' => ' ',
+            'image' => '',
+            'sortid' => 22,
+            'display' => true,
+        ]);
+
     }
 }
