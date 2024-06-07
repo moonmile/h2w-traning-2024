@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1>Product List : {{ slug }}</h1>
+        <h1>Product List</h1>
         <div class="ProductLink-wrap">
             <ul v-for="product in products" :key="product.id" class="ProductLink-list">
                 <li class="ProductLink-item">
-                    <a class="ProductLink" href=""><!-- herf="カートに入れる画面" -->
+                    <a class="ProductLink"><!-- herf="カートに入れる画面"　カートボタンと共存したい -->
                         <div class="ProductLink-inner">
                             <div class="ProductLink-img">
                                 <img :src="product.image" alt="product.name">
@@ -15,7 +15,7 @@
                                 </p>
                                 <ul class="price-list">
                                     <li class="price">
-                                        ￥{{ product.price }}<button class="btn btn-primary" @click="clickCart(product)">カート</button>
+                                        ￥{{ product.price }}<button class="btn btn-primary" @click="clickCart(product)">カートに追加</button>
                                     </li>
                                 </ul>
                             </div>
@@ -49,10 +49,10 @@ const products = ref([
 
 
 async function onload() {
-    const url = `http://localhost:8000/api/categorie/${slug.value}/products`;
+    const url = `http://localhost:8000/api/products`;
     console.log( url )
     const response = await axios.get(url);
-    products.value = response.data.data[0].products; 
+    products.value = response.data.data; 
 }
 onMounted(onload) ;
 
@@ -62,6 +62,7 @@ onMounted(onload) ;
  */
 async function clickCart(product) {
     console.log('clickCart ' + product.name);
+    alert('カートに追加しました');
     // カートに追加
     const cartStore = useCartStore();
     cartStore.addCart(product);

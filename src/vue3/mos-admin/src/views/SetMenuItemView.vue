@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Product Item View : {{ id }}</h1>
+        <h1>setmenu Item View : {{ id }}</h1>
 
         <div class="mb-3">
             <label for="id" class="form-label">ID</label>
@@ -11,9 +11,15 @@
             <input type="text" id="slug" v-model="item.slug" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="title" class="form-label">Name</label>
-            <input type="text" id="title" v-model="item.name" class="form-control">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" v-model="item.name" class="form-control">
         </div>
+        <!--
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" v-model="item.title" class="form-control">
+        </div>
+        -->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea id="description" v-model="item.description" class="form-control"></textarea>
@@ -59,10 +65,10 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
-interface Product {
+interface setmenu {
     id: number;
     slug: string;
-    name: string;
+    name: string; // title
     description: string;
     image: string;
     price: string;
@@ -71,15 +77,16 @@ interface Product {
     created_at: string;
     updated_at: string;
     is_delete: boolean;
+    hidden: boolean;
 }
 
 const router = useRouter();
 const id = ref(router.currentRoute.value.params.id);
 // 初期値をいれておく
-const item = ref<Product>({ 
+const item = ref<setmenu>({ 
     id: 0, 
     slug: '', 
-    name: '',
+    name: '',    // title: '', 
     description: '', 
     image: '', 
     price: '',
@@ -87,11 +94,12 @@ const item = ref<Product>({
     display: false, 
     created_at: '', 
     updated_at: '', 
-    is_delete: false 
+    is_delete: false,
+    hidden: false
 });
 
 /**
- * Loads the product item data from the server.
+ * Loads the category item data from the server.
  * @async
  * @function onload
  */
@@ -109,7 +117,7 @@ async function onload() {
 onMounted(onload);
 
 /**
- * Updates the product item.
+ * Updates the category item.
  * @async
  * @function onupdate
  * @returns {Promise<void>}
@@ -117,17 +125,17 @@ onMounted(onload);
 async function onupdate() {
     console.log('onupdate');
     var url = 'http://localhost:8000/api/products/' + id.value;
-    const response = await axios.put(url, item.value)
-    router.push({ name: 'product-list' });
+    const response = await axios.put(url, item.value);
+    router.push({ name: 'setmenu-list' });
 }
 
 /**
  * Handles the cancel action.
- * Navigates back to the 'product' route.
+ * Navigates back to the 'category' route.
  */
 function oncancel() {
     console.log('oncancel');
-    router.push({ name: 'product-list' });
+    router.push({ name: 'setmenu-list' });
 }
 
 
