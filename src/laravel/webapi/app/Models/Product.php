@@ -13,4 +13,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'product_category_link', 'product_id', 'category_id');
     }
+
+    public function recommendations()
+    {
+        return $this->hasMany(ProductRecommendation::class);
+    }    
 }

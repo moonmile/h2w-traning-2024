@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 /*
@@ -67,6 +68,20 @@ class ApiCustomerController extends Controller
             ], 200);
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function orders($customerId)
+    {
+        $orders = Order::where('customer_id', $customerId)->with('sales.product')->get();
+        
+        return response()->json([
+            'message' => 'OK',
+            'data' => $orders
+        ], 200);
+    }
+
 
 
 

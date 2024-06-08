@@ -11,9 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // いったん消す
-        Schema::dropIfExists('product_category_link');
-
         Schema::create('product_category_link', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id')->index();
