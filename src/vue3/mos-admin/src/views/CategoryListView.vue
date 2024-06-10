@@ -32,8 +32,10 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { useCategoryStore } from '@/stores/category';
 
 const router = useRouter();
+const categoryStore = useCategoryStore();
 
 const categories = ref([
     { id: 1, title: 'Category 1' },
@@ -44,6 +46,7 @@ async function onload() {
     const url = 'http://localhost:8000/api/categories';
     const response = await axios.get(url);
     categories.value = response.data.data ;
+    categoryStore.categories.values = response.data.data ;
 }
 onMounted(onload) ;
 

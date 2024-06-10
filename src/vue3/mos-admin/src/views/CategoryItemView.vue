@@ -4,7 +4,7 @@
 
         <div class="mb-3">
             <label for="id" class="form-label">ID</label>
-            <input type="text" id="id" v-model="item.id" class="form-control">
+            <div>{{  item.id }}</div>
         </div>  
         <div class="mb-3">
             <label for="slug" class="form-label">Slug</label>
@@ -32,15 +32,11 @@
         </div>
         <div class="mb-3">
             <label for="created_at" class="form-label">Created At</label>
-            <input type="datetime-local" id="created_at" v-model="item.created_at" class="form-control">
+            <div>{{  formatDateTime(item.created_at.toString()) }}</div>
         </div>
         <div class="mb-3">
             <label for="updated_at" class="form-label">Updated At</label>
-            <input type="datetime-local" id="updated_at" v-model="item.updated_at" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="is_delete" class="form-label">Is Delete</label>
-            <input type="checkbox" id="is_delete" v-model="item.is_delete" class="form-check-input">
+            <div>{{  formatDateTime(item.updated_at.toString()) }}</div>
         </div>
         <hr />
 
@@ -54,6 +50,7 @@
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { useCategoryStore } from '@/stores/category';
 
 interface Category {
     id: number;
@@ -63,10 +60,11 @@ interface Category {
     image: string;
     sortid: number;
     display: boolean;
-    created_at: string;
-    updated_at: string;
-    is_delete: boolean;
+    created_at: Date;
+    updated_at: Date;
+    deleted_at: Date | null;
 }
+const categoryStore = useCategoryStore();
 
 const router = useRouter();
 const id = ref(router.currentRoute.value.params.id);
@@ -79,9 +77,9 @@ const item = ref<Category>({
     image: '', 
     sortid: 0, 
     display: false, 
-    created_at: '', 
-    updated_at: '', 
-    is_delete: false 
+    created_at: new Date(), 
+    updated_at: new Date(), 
+    deleted_at: null,
 });
 
 /**
@@ -95,12 +93,36 @@ async function onload() {
     const response = await axios.get(url);
     item.value = response.data.data;
     // 日時をフォーマット変換しておく
-    item.value.created_at = formatDateTime(item.value.created_at);
-    item.value.updated_at = formatDateTime(item.value.updated_at);
+    // item.value.created_at = formatDateTime(item.value.created_at.toString());
+    // item.value.updated_at = formatDateTime(item.value.updated_at.toString());
 }
 
 /// ロード時に実行
 onMounted(onload);
+
+
+function validate() {
+    // タイトルが空の場合はエラー
+    if (item.value.title === '') {
+        alert('タイトルを入力してください');
+        return false;
+    }
+    // slug が空白の場合はエラー
+    if (item.value.slug === '') {
+        alert('Slugを入力してください');
+        return false;
+    }
+    // slug が重複していた時はエラー
+    let found = categoryStore.categories.values.find((category) => category.slug === item.value.slug);
+    if (found && found.id !== item.value.id) {
+        alert('Slugが重複しています');
+        return false;
+    }
+
+    return true;
+}
+
+
 
 /**
  * Updates the category item.
@@ -109,6 +131,9 @@ onMounted(onload);
  * @returns {Promise<void>}
  */
 async function onupdate() {
+    if (!validate()) {
+        return;
+    }
     console.log('onupdate');
     var url = 'http://localhost:8000/api/categories/' + id.value;
     const response = await axios.put(url, item.value)
@@ -142,7 +167,7 @@ function formatDateTime(datetimeStr: string) {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     
     // 目的の形式にフォーマット
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
 /**
