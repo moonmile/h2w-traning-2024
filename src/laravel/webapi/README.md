@@ -138,5 +138,20 @@ npm install -g @openapitools/openapi-generator-cli
 openapi-generator-cli generate -i openapi/categories.yaml -g php-laravel -o path_to_laravel_project
 ```
 
+## 画像データの利用
 
+strage/app/public/images/*.jpeg に画像ファイルが配置される。
+
+以下で、シンボリックリンクを作成を作成する。
+```
+php artisan storage:link
+```
+
+public/strage が storage\app\public にリンクされる。
+
+vue3 からは以下でアクセスする
+
+```
+'http://localhost:8000/storage/images/' + item.value.image + ".jpeg";
+```
 
