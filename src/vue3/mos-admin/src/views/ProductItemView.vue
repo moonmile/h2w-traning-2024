@@ -21,6 +21,7 @@
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="text" id="image" v-model="item.image" class="form-control">
+            <img :src="item.imageurl" alt="Product Image" style="max-width: 200px; max-height: 200px;" />
         </div>
         <div class="mb-3">
             <label for="sortid" class="form-label">Sort ID</label>
@@ -51,7 +52,7 @@
 
 <script setup lang="ts">
 
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
@@ -66,6 +67,7 @@ interface Product {
     created_at: string;
     updated_at: string;
     is_delete: boolean;
+    imageurl: string;
 }
 
 const router = useRouter();
@@ -81,7 +83,8 @@ const item = ref<Product>({
     display: false, 
     created_at: '', 
     updated_at: '', 
-    is_delete: false 
+    is_delete: false,
+    imageurl: '',
 });
 
 /**
@@ -97,6 +100,10 @@ async function onload() {
     // 日時をフォーマット変換しておく
     item.value.created_at = formatDateTime(item.value.created_at);
     item.value.updated_at = formatDateTime(item.value.updated_at);
+    // 画像URLを取得
+    item.value.imageurl = 'http://localhost:8000/storage/images/' + item.value.image + ".jpeg";
+    console.log(item.value.imageurl);
+
 }
 
 /// ロード時に実行
