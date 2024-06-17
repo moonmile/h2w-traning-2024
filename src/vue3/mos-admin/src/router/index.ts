@@ -4,6 +4,7 @@ import CategoryListView from '../views/CategoryListView.vue'
 import CategoryItemView from '../views/CategoryItemView.vue'
 import ProductListView from '../views/ProductListView.vue'
 import ProductItemView from '../views/ProductItemView.vue'
+import StoreProductsView from '../views/StoreProductsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/product/:id',
       name: 'product-item',
       component: ProductItemView
+    },
+    {
+      path: '/store-products/:id',
+      name: 'store-products',
+      component: StoreProductsView
     },
   ]
 })
