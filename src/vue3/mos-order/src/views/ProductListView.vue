@@ -15,15 +15,13 @@ import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useCartStore } from '../stores/Cart';
-
+import type { Product } from '../types/product'
+import type { Category } from '../types/category'
+   
 const router = useRouter();
-const slug = ref(router.currentRoute.value.params.slug);
+const slug = ref(router.currentRoute.value.params.slug); 
 
-const products = ref([
-                { id: 1, name: 'Product 1', price: 10 },
-                { id: 2, name: 'Product 2', price: 20 },
-                { id: 3, name: 'Product 3', price: 30 },
-            ]);
+const products = ref<Product[]>([]);
 
 const cartStore = useCartStore();
 
@@ -40,11 +38,16 @@ onMounted(onload) ;
 /**
  * Handles the click event on the cart.
  */
-function clickCart(item) {
+function clickCart(item : Product) {
     console.log('clickCart')
-    cartStore.addProcuct(item);
+    cartStore.addProduct(item);
 
     alert('clickCart ' + item.name)
+
+    console.log('カートの中身')
+    for (const item of cartStore.products) {
+        console.log(item.name)
+    }
 }
 
 

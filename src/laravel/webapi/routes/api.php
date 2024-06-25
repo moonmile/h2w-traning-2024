@@ -28,6 +28,8 @@ Route::apiResource('stores', ApiStoreController::class);
 Route::apiResource('customers', ApiCustomerController::class);
 Route::apiResource('orders', ApiOrderController::class);
 
+// カテゴリ slug で検索
+Route::get('categories/{category_slug}/slug', [ApiCategoryController::class, 'getbyslug']);
 // カテゴリ slug に紐づく商品一覧
 Route::get('categories/{category_slug}/products', [ApiCategoryController::class, 'products']);
 // 店舗 ID に紐づく商品一覧

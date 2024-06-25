@@ -15,12 +15,22 @@ class ApiCategoryController extends Controller
      */
     public function index()
     {
-        $items = Category::all();
+        $items = Category::orderBy('sortid', 'asc')
+                    ->get();
+
         return response()->json([
             'data' => $items,
         ], 200);
     }
 
+    public function getbyslug( $category_slug )
+    {
+        $item = Category::where('slug', $category_slug)
+                    ->first();
+        return response()->json([
+            'data' => $item
+        ], 200);
+    }
 
 
     /**

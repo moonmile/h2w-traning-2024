@@ -22,20 +22,21 @@ class CategoryTableSeeder extends Seeder
             'sortid' => 1,
             'display' => true,
         ]);
-        Category::create([
-            'slug' => 'special2',
-            'title' => 'ネット注文特別価格メニュー',
-            'description' => ' ',
-            'image' => '',
-            'sortid' => 2,
-            'display' => true,
-        ]);
+
         Category::create([
             'slug' => 'special3',
             'title' => '限定メニュー',
             'description' => ' ',
             'image' => '',
             'sortid' => 3,
+            'display' => true,
+        ]);
+        Category::create([
+            'slug' => 'special2',
+            'title' => 'ネット注文特別価格メニュー',
+            'description' => ' ',
+            'image' => '',
+            'sortid' => 2,
             'display' => true,
         ]);
 
