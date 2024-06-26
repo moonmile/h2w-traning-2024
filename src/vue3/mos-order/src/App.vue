@@ -36,6 +36,7 @@ function clickLogin() {
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/top">TOP</RouterLink>
         <RouterLink to="/category">カテゴリー</RouterLink>
+        <RouterLink to="/login">ログイン</RouterLink>
       </nav>
     </div>
   </header>

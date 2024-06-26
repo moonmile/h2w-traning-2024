@@ -11,6 +11,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/cetegory">カテゴリー</RouterLink>
         <RouterLink to="/product">商品</RouterLink>
+        <RouterLink to="/login">ログイン</RouterLink>
       </nav>
     </div>
   </header>

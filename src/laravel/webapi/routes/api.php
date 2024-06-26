@@ -7,6 +7,7 @@ use App\Http\Controllers\ApiCategoryController;
 use App\Http\Controllers\ApiStoreController;
 use App\Http\Controllers\ApiCustomerController;
 use App\Http\Controllers\ApiOrderController;
+use App\Http\Controllers\ApiLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,6 @@ Route::get('customers/{customerId}/orders', [ApiCustomerController::class, 'orde
 // 注文登録
 Route::post('orders', [ApiOrderController::class, 'store']);
 
+// ユーザー認証
+Route::get('login', [ApiLoginController::class, 'show']);
+Route::post('login', [ApiLoginController::class, 'login']);

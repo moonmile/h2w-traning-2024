@@ -155,3 +155,23 @@ vue3 からは以下でアクセスする
 'http://localhost:8000/storage/images/' + item.value.image + ".jpeg";
 ```
 
+## 認証
+
+https://readouble.com/laravel/10.x/ja/starter-kits.html を参考に
+
+breeze で vue のフロントを入れる。
+
+```
+php artisan breeze:install
+
+php artisan migrate
+npm install
+npm run dev
+```
+
+- 登録 http://localhost:8000/register
+- ログイン http://localhost:8000/login
+
+
+ 
+

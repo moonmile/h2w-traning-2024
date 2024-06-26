@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import TopView from '../views/TopView.vue'
 import CategoryView from '../views/CategoryView.vue'
 import ProductListView from '../views/ProductListView.vue'
+import LoginView from '../views/LoginView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,6 +27,11 @@ const router = createRouter({
       component: TopView
     },
     {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
+    {
       path: '/category',
       name: 'category',
       component: CategoryView
@@ -34,6 +41,7 @@ const router = createRouter({
       name: 'product-list',
       component: ProductListView
     },
+
   ]
 })
 
