@@ -43,5 +43,6 @@ Route::get('customers/{customerId}/orders', [ApiCustomerController::class, 'orde
 Route::post('orders', [ApiOrderController::class, 'store']);
 
 // ユーザー認証
+// Route::apiResource('login', ApiLoginController::class);
 Route::get('login', [ApiLoginController::class, 'show']);
 Route::post('login', [ApiLoginController::class, 'login']);

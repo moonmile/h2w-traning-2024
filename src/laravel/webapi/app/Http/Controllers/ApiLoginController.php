@@ -28,7 +28,6 @@ class ApiLoginController extends Controller
     {
         \Log::Debug('called ApiLoginController::login');
         $request->authenticate();
-        $request->session()->regenerate();
         $user = Auth::user();
         return response()->json([
             'data' => $user

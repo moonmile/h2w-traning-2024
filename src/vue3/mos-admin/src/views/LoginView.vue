@@ -24,8 +24,9 @@ async function login() {
     console.log('Login button clicked');
     const url = 'http://localhost:8000/api/login';
     const data = {
-        username: username.value,
-        password: password.value
+        email: username.value,
+        password: password.value,
+        remember: false,
     };
     const response = await axios.post(url, data) ;
     const user = response.data.user ;
